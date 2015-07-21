@@ -6,6 +6,7 @@ import volley.Config_URL;
 import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -70,14 +71,30 @@ public class Activity_JsonRequest extends Activity implements OnClickListener
 	{
 		showProgressDialog();
 		JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.GET,
-				Config_URL.URL_JSON_OBJECT, null,
+				Config_URL.get_JSON_Object_URL(), null,
 				new Response.Listener<JSONObject>()
 				{
 					@Override
 					public void onResponse(JSONObject response)
 					{
 						Log.d(TAG, response.toString());
-						msgResponse.setText(response.toString());
+						//msgResponse.setText(response.toString());
+
+						//Setting those received data into model
+						try
+						{
+							Model_Person person = new Model_Person(response.toString());
+							msgResponse.setText( person.getName()			+System.getProperty("line.separator")
+												+person.getEmail()			+System.getProperty("line.separator")
+												+person.getPhone_Mobile()	+System.getProperty("line.separator")
+												+person.getPhone_Home());
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+						}
+						////////////////////////////////////////
+
 						hideProgressDialog();
 					}
 				}, new Response.ErrorListener()
@@ -88,10 +105,7 @@ public class Activity_JsonRequest extends Activity implements OnClickListener
 				VolleyLog.d(TAG, "Error: " + error.getMessage());
 				hideProgressDialog();
 			}
-		}) {
-			/**
-			 * Passing some request headers
-			 * */
+		}) {// Passing some request headers	-	overriding this 2 functions (getHeaders() and getParams() is optional)
 			@Override
 			public Map<String, String> getHeaders() throws AuthFailureError
 			{
@@ -125,12 +139,37 @@ public class Activity_JsonRequest extends Activity implements OnClickListener
 	private void makeJsonArryReq()
 	{
 		showProgressDialog();
-		JsonArrayRequest req = new JsonArrayRequest(Config_URL.URL_JSON_ARRAY,
+		JsonArrayRequest req = new JsonArrayRequest(Config_URL.get_JSON_Array_URL(),
 				new Response.Listener<JSONArray>() {
 					@Override
 					public void onResponse(JSONArray response) {
 						Log.d(TAG, response.toString());
-						msgResponse.setText(response.toString());
+						//msgResponse.setText(response.toString());
+
+						//Setting those received data into model
+						try
+						{
+							JSONArray jsonArray = new JSONArray(response.toString());
+							msgResponse.setText("");
+
+							for(int i=0;i<jsonArray.length();i++)
+							{
+								JSONObject e = jsonArray.getJSONObject(i);
+
+								Model_Person person = new Model_Person(jsonArray.getJSONObject(i).toString());
+								msgResponse.setText( msgResponse.getText()		+System.getProperty("line.separator")+System.getProperty("line.separator")
+													+person.getName()			+System.getProperty("line.separator")
+													+person.getEmail()			+System.getProperty("line.separator")
+													+person.getPhone_Mobile()	+System.getProperty("line.separator")
+													+person.getPhone_Home());
+							}
+						}
+						catch (JSONException e)
+						{
+							e.printStackTrace();
+						}
+						////////////////////////////////////////
+
 						hideProgressDialog();
 					}
 				}, new Response.ErrorListener() {

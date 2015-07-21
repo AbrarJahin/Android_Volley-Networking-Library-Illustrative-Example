@@ -46,7 +46,7 @@ public class Activity_ImageRequest extends Activity
 		ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 		// If you are using NetworkImageView
-		imgNetWorkView.setImageUrl(Config_URL.URL_IMAGE, imageLoader);
+		imgNetWorkView.setImageUrl(Config_URL.get_Image_URL(), imageLoader);
 
 		
 		// If you are using normal ImageView
@@ -67,11 +67,11 @@ public class Activity_ImageRequest extends Activity
 		});*/
 
 		// Loading image with placeholder and error image
-		imageLoader.get(Config_URL.URL_IMAGE, ImageLoader.getImageListener(
+		imageLoader.get(Config_URL.get_Image_URL(), ImageLoader.getImageListener(
 				imageView, R.mipmap.ico_loading, R.mipmap.ico_error));
 		
 		Cache cache = AppController.getInstance().getRequestQueue().getCache();
-		Entry entry = cache.get(Config_URL.URL_IMAGE);
+		Entry entry = cache.get(Config_URL.get_Image_URL());
 		if(entry != null){
 			try {
 				String data = new String(entry.data, "UTF-8");

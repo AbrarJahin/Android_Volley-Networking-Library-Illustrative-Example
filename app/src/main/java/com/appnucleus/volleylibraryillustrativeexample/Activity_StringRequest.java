@@ -69,7 +69,7 @@ public class Activity_StringRequest extends Activity
 		showProgressDialog();
 
 		StringRequest strReq = new StringRequest(Request.Method.GET,
-				Config_URL.URL_STRING_REQ, new Response.Listener<String>()
+				Config_URL.get_String_URL("http://infohost.nmt.edu/tcc/help/pubs/xhtml/example.html"), new Response.Listener<String>()
 		{
 			@Override
 			public void onResponse(String response)

@@ -8,7 +8,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /*
-* 	We are creating a Application Singleton Object, so it should be declared as a application in the "AndroidMainFests" file
+* 	We are creating a Application Singleton Object by extending Application, so it should be declared as a application in the "AndroidMainFests" file
 * */
 
 public class AppController extends Application
