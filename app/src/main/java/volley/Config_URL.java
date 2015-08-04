@@ -4,10 +4,10 @@ package volley;
 
 public class Config_URL
 {
-	private static final String URL_JSON_OBJECT = "http://api.androidhive.info/volley/person_object.json";
-	private static final String URL_JSON_ARRAY = "http://api.androidhive.info/volley/person_array.json";
-	private static final String URL_STRING_REQ = "http://api.androidhive.info/volley/string_response.html";
-	private static final String URL_IMAGE = "http://api.androidhive.info/volley/volley-image.jpg";
+	private static final String URL_JSON_OBJECT = "http://api.appnucleus.com/volley/person_object.JSON";
+	private static final String URL_JSON_ARRAY  = "http://api.appnucleus.com/volley/person_array.JSON";
+	private static final String URL_STRING_REQ  = "http://api.appnucleus.com/volley/string_response.html";
+	private static final String URL_IMAGE       = "http://api.appnucleus.com/volley/volley-image.jpg";
 
 	//If you need any parameter passed with the URL (GET) - U need to modify this functions
 	public static String get_JSON_Object_URL()
